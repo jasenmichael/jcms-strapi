@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_settings",
+  "info": {
+    "name": "Site Settings"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Site Title"
+    },
+    "Description": {
+      "type": "string",
+      "default": "Site Description"
+    },
+    "shareimage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

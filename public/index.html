@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- The first thing in any HTML file should be the charset -->
+    <meta charset="utf-8" />
+    <!-- Make the page mobile compatible -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>JCMS Admin</title>
+    <script>
+      function run() {
+        console.log("loaded");
+        // alert();
+        window.addEventListener("message", (event) => {
+          const method = JSON.parse(event.data).method;
+          if (method === "login") {
+            const adminJwtToken = JSON.parse(event.data).adminJwtToken;
+            const adminUserInfo = JSON.parse(event.data).adminUserInfo;
+            const url = JSON.parse(event.data).url;
+            // console.log({ adminJwtToken, adminUserInfo });
+            sessionStorage.setItem("jwtToken", JSON.stringify(adminJwtToken));
+            sessionStorage.setItem("userInfo", JSON.stringify(adminUserInfo));
+            sessionStorage.setItem("url", JSON.stringify(url));
+            window.location.href = "/admin";
+          }
+          if (method === "changeRoute") {
+            console.log("wtf!!!!!");
+            // console.log(event);
+            // window.location.href = "/";
+          }
+        });
+      }
+    </script>
+  </head>
+  <body onload="run()">
+    <!-- The app hooks into this div -->
+    <!-- <div id="app"></div> -->
+    <div id="thing"></div>
+  </body>
+</html>

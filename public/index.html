@@ -9,9 +9,11 @@
     <title>JCMS Admin</title>
     <script>
       function run() {
-        console.log("loaded");
         // alert();
+        console.log("loaded admin iframe");
         window.addEventListener("message", (event) => {
+          console.log("message recieved in index.html");
+          console.log("eventData", JSON.parse(event.data));
           const method = JSON.parse(event.data).method;
           if (method === "login") {
             const adminJwtToken = JSON.parse(event.data).adminJwtToken;
@@ -22,11 +24,6 @@
             sessionStorage.setItem("userInfo", JSON.stringify(adminUserInfo));
             sessionStorage.setItem("url", JSON.stringify(url));
             window.location.href = "/admin";
-          }
-          if (method === "changeRoute") {
-            console.log("wtf!!!!!");
-            // console.log(event);
-            // window.location.href = "/";
           }
         });
       }

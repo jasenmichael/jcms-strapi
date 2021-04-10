@@ -1,39 +1,42 @@
-module.exports = {
-  gzip: {
-    enabled: true,
-    options: {
-      br: false,
-    },
-  },
-  settings: {
-    parser: {
+module.exports = ({env}) => {
+  const FRONTEND_URL = env("FRONTEND_URL")
+  return {
+    gzip: {
       enabled: true,
-      multipart: true,
-      formidable: {
-        maxFileSize: 200 * 1024 * 1024, // Defaults to 200mb
-      },
-      cors: {
-        origin: ["*"], //allow all
-        // origin: [
-        //   "http://localhost:3000",
-        //   "https://mysite.com",
-        //   "https://www.mysite.com",
-        // ],
+      options: {
+        br: false,
       },
     },
-    poweredBy: {
-      enabled: true,
-      value: "JCMS",
+    settings: {
+      parser: {
+        enabled: true,
+        multipart: true,
+        formidable: {
+          maxFileSize: 200 * 1024 * 1024, // Defaults to 200mb
+        },
+        cors: {
+          origin: ["*"], //allow all
+          // origin: [
+          //   "http://localhost:3000",
+          //   "https://mysite.com",
+          //   "https://www.mysite.com",
+          // ],
+        },
+      },
+      poweredBy: {
+        enabled: true,
+        value: "JCMS",
+      },
+      xframe: {
+        enabled: true,
+        value: `ALLOW-FROM ${FRONTEND_URL}`,
+      },
+      headers: [
+        "Content-Type",
+        "Authorization",
+        "X-Frame-Options",
+        `Content-Security-Policy: frame-ancestors ${FRONTEND_URL}`,
+      ],
     },
-    xframe: {
-      enabled: true,
-      value: "ALLOW-FROM http://localhost:3000",
-    },
-    headers: [
-      "Content-Type",
-      "Authorization",
-      "X-Frame-Options",
-      "Content-Security-Policy: frame-ancestors http://localhost:3000",
-    ],
-  },
+  };
 };

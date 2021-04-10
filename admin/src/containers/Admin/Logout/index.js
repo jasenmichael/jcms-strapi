@@ -30,21 +30,20 @@ const Logout = ({ history: { push } }) => {
 
   const frontendUrl = JSON.parse(sessionStorage.getItem("url")) || null; //"http://localhost:3000";
   // const strapiUrl = "http://localhost:1337";
-  console.log(
-    "----redirect----",
-    frontendUrl
-      ? frontendUrl.replace("/admin", "/logout")
-      : window.strapi.remoteURL
-  );
+  console.log("----redirect----", top.window.location);
   const handleLogout = () => {
-    sessionStorage.removeItem("url")
+    sessionStorage.removeItem("url");
     auth.clearAppStorage();
     // push('/auth/login');
     if (typeof window !== "undefined") {
-      window.location.href = frontendUrl
-        ? frontendUrl.replace("/admin", "/logout")
-        : window.strapi.remoteURL;
-      // window.location.href = window.strapi.remoteURL + "/admin";
+      if (frontendUrl) {
+        top.window.location = frontendUrl;
+      } else {
+        // push("/auth/login");
+        push("/");
+      }
+
+      // parent.window.location = window.location
     }
   };
 

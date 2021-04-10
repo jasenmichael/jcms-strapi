@@ -28,19 +28,23 @@ const Logout = ({ history: { push } }) => {
     });
   };
 
-  const frontendUrl = JSON.parse(sessionStorage.getItem("url")) || null; //"http://localhost:3000";
-  // const strapiUrl = "http://localhost:1337";
-  console.log("----redirect----", top.window.location);
+  const frontendUrl = sessionStorage.getItem("url");
+
   const handleLogout = () => {
     sessionStorage.removeItem("url");
     auth.clearAppStorage();
     // push('/auth/login');
     if (typeof window !== "undefined") {
       if (frontendUrl) {
-        top.window.location = frontendUrl;
+        try {
+          top.window.location = JSON.parse(frontendUrl).replace(
+            "admin",
+            "logout"
+          );
+        } catch (error) {}
       } else {
         // push("/auth/login");
-        push("/");
+        push("/admin");
       }
 
       // parent.window.location = window.location

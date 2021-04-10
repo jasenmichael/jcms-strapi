@@ -11,35 +11,43 @@
  * the linting exception.
  */
 
-import React, { useEffect, useRef, useState, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
-import { LoadingIndicatorPage, auth, request } from 'strapi-helper-plugin';
-import GlobalStyle from '../../components/GlobalStyle';
-import Admin from '../Admin';
-import AuthPage from '../AuthPage';
-import NotFoundPage from '../NotFoundPage';
+import React, { useEffect, useRef, useState, useMemo } from "react";
+import PropTypes from "prop-types";
+import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators, compose } from "redux";
+import { LoadingIndicatorPage, auth, request } from "strapi-helper-plugin";
+import GlobalStyle from "../../components/GlobalStyle";
+import Admin from "../Admin";
+import AuthPage from "../AuthPage";
+import NotFoundPage from "../NotFoundPage";
 // eslint-disable-next-line import/no-cycle
-import NotificationProvider from '../NotificationProvider';
-import Theme from '../Theme';
-import { getUID } from './utils';
-import { Content, Wrapper } from './components';
-import { getDataSucceeded } from './actions';
-import NewNotification from '../NewNotification';
-import PrivateRoute from '../PrivateRoute';
-import routes from './utils/routes';
-import { makeUniqueRoutes, createRoute } from '../SettingsPage/utils';
+import NotificationProvider from "../NotificationProvider";
+import Theme from "../Theme";
+import { getUID } from "./utils";
+import { Content, Wrapper } from "./components";
+import { getDataSucceeded } from "./actions";
+import NewNotification from "../NewNotification";
+import PrivateRoute from "../PrivateRoute";
+import routes from "./utils/routes";
+import { makeUniqueRoutes, createRoute } from "../SettingsPage/utils";
+
+// added for - custom admin change route listener
+import { useHistory } from "react-router-dom";
 
 function App(props) {
   const getDataRef = useRef();
-  const [{ isLoading, hasAdmin }, setState] = useState({ isLoading: true, hasAdmin: false });
+  const [{ isLoading, hasAdmin }, setState] = useState({
+    isLoading: true,
+    hasAdmin: false,
+  });
   getDataRef.current = props.getDataSucceeded;
 
   const authRoutes = useMemo(() => {
     return makeUniqueRoutes(
-      routes.map(({ to, Component, exact }) => createRoute(Component, to, exact))
+      routes.map(({ to, Component, exact }) =>
+        createRoute(Component, to, exact)
+      )
     );
   }, []);
 
@@ -50,8 +58,8 @@ function App(props) {
       try {
         const {
           data: { token },
-        } = await request('/admin/renew-token', {
-          method: 'POST',
+        } = await request("/admin/renew-token", {
+          method: "POST",
           body: { token: currentToken },
         });
         auth.updateToken(token);
@@ -70,7 +78,7 @@ function App(props) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await request('/admin/init', { method: 'GET' });
+        const { data } = await request("/admin/init", { method: "GET" });
 
         const { uuid } = data;
 
@@ -78,15 +86,15 @@ function App(props) {
           try {
             const deviceId = await getUID();
 
-            fetch('https://analytics.strapi.io/track', {
-              method: 'POST',
+            fetch("https://analytics.strapi.io/track", {
+              method: "POST",
               body: JSON.stringify({
-                event: 'didInitializeAdministration',
+                event: "didInitializeAdministration",
                 uuid,
                 deviceId,
               }),
               headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
               },
             });
           } catch (e) {
@@ -98,8 +106,8 @@ function App(props) {
         setState({ isLoading: false, hasAdmin: data.hasAdmin });
       } catch (err) {
         strapi.notification.toggle({
-          type: 'warning',
-          message: { id: 'app.containers.App.notification.error.init' },
+          type: "warning",
+          message: { id: "app.containers.App.notification.error.init" },
         });
       }
     };
@@ -107,7 +115,22 @@ function App(props) {
     getData();
   }, []);
 
-  const setHasAdmin = hasAdmin => setState(prev => ({ ...prev, hasAdmin }));
+  const setHasAdmin = (hasAdmin) => setState((prev) => ({ ...prev, hasAdmin }));
+
+  // custom admin change route listener
+  const history = useHistory();
+  useEffect(() => {
+    window.addEventListener("message", (event) => {
+      console.log("message recieved in app");
+      const eventData = JSON.parse(event.data);
+      const method = eventData.method;
+      if (method === "changeRoute") {
+        console.log("changeRoute", eventData.path);
+        // .href will navigate in the iframe
+        history.push(eventData.path);
+      }
+    });
+  }, []);
 
   if (isLoading) {
     return <LoadingIndicatorPage />;
@@ -124,8 +147,12 @@ function App(props) {
             {authRoutes}
             <Route
               path="/auth/:authType"
-              render={routerProps => (
-                <AuthPage {...routerProps} setHasAdmin={setHasAdmin} hasAdmin={hasAdmin} />
+              render={(routerProps) => (
+                <AuthPage
+                  {...routerProps}
+                  setHasAdmin={setHasAdmin}
+                  hasAdmin={hasAdmin}
+                />
               )}
               exact
             />

@@ -1,31 +1,33 @@
 {
   "kind": "singleType",
-  "collectionName": "site_settings",
+  "collectionName": "site-settings",
   "info": {
     "name": "Site Settings"
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
       "type": "string",
-      "default": "Site Title"
+      "required": true,
+      "unique": false
     },
-    "Description": {
-      "type": "string",
+    "description": {
+      "type": "text",
+      "required": true,
       "default": "Site Description"
     },
-    "shareimage": {
+    "share_image": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
         "images"
       ],
       "plugin": "upload",
-      "required": false
+      "required": true
     }
   }
 }

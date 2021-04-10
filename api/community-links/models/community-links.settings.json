@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "community-links",
+  "info": {
+    "name": "Community Links"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "alt_text": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

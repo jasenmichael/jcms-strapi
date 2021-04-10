@@ -4,13 +4,15 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop",
-    "start": "strapi start",
-    "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "build": "npm run overrides && strapi build",
+    "develop": "npm run overrides && strapi develop",
+    "start": "npm run overrides && strapi start",
+    "overrides": "node utils/overrides.js"
   },
   "devDependencies": {},
   "dependencies": {
+    "dropbox": "^9.4.0",
     "knex": "0.21.18",
     "mysql": "^2.18.1",
     "strapi": "3.5.4",
@@ -21,14 +23,14 @@
     "strapi-plugin-email": "3.5.4",
     "strapi-plugin-upload": "3.5.4",
     "strapi-plugin-users-permissions": "3.5.4",
-    "strapi-provider-upload-dropbox": "^1.0.2",
+    "strapi-provider-upload-dropbox-v2": "file:../../npm-packages/strapi-provider-upload-dropbox-v2",
     "strapi-utils": "3.5.4"
   },
   "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "eabfcf1f-cf59-4349-8e64-7b9f76e1724b"
+    "uuid": false
   },
   "engines": {
     "node": ">=10.16.0 <=14.x.x",

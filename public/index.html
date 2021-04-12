@@ -19,12 +19,19 @@
             if (method === "login") {
               const adminJwtToken = JSON.parse(event.data).adminJwtToken;
               const adminUserInfo = JSON.parse(event.data).adminUserInfo;
-              const url = JSON.parse(event.data).url;
+              const frontendUrl = JSON.parse(event.data).url; //.includes('/admin') ? JSON.parse(event.data).url.split('/admin')[0] : JSON.parse(event.data).url
+              const url = JSON.parse(event.data).url.includes("/admin?q=")
+                ? "/admin" +
+                  decodeURIComponent(
+                    JSON.parse(event.data).url.split("/admin?q=")[1]
+                  )
+                : "/admin";
+              console.log("===URL===:", url);
               // console.log({ adminJwtToken, adminUserInfo });
               sessionStorage.setItem("jwtToken", JSON.stringify(adminJwtToken));
               sessionStorage.setItem("userInfo", JSON.stringify(adminUserInfo));
-              sessionStorage.setItem("url", JSON.stringify(url));
-              window.location.href = "/admin";
+              sessionStorage.setItem("url", JSON.stringify(frontendUrl));
+              window.location.href = url; // "/admin";
             }
           });
         } else {

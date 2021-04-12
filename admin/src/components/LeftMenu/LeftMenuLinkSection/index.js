@@ -70,7 +70,7 @@ const LeftMenuLinksSection = ({
     matchSorter(
       links.filter((item) => {
         // console.log("SECTION:", section);
-        // console.log("LABEL", item.label, item.label.defaultMessage, item);
+        // console.log("LABEL", item.label , item.label.defaultMessage, item);
         return (
           !hideLinks.includes(item.label.defaultMessage) &&
           !hideLinks.includes(item.label) &&
@@ -112,6 +112,7 @@ const LeftMenuLinksSection = ({
                 key={index}
                 iconName={link.icon}
                 label={link.label}
+                // destination={'http://localhost:3000' + link.destination}
                 destination={link.destination}
                 notificationsCount={link.notificationsCount || 0}
               />

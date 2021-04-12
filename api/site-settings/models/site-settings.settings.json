@@ -29,6 +29,22 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "Address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.address"
+    },
+    "phone": {
+      "type": "biginteger"
+    },
+    "email": {
+      "type": "email"
+    },
+    "social_links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "settings.social-links"
     }
   }
 }

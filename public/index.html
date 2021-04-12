@@ -10,22 +10,27 @@
     <script>
       function run() {
         // alert();
-        console.log("loaded admin iframe");
-        window.addEventListener("message", (event) => {
-          console.log("message recieved in index.html");
-          console.log("eventData", JSON.parse(event.data));
-          const method = JSON.parse(event.data).method;
-          if (method === "login") {
-            const adminJwtToken = JSON.parse(event.data).adminJwtToken;
-            const adminUserInfo = JSON.parse(event.data).adminUserInfo;
-            const url = JSON.parse(event.data).url;
-            // console.log({ adminJwtToken, adminUserInfo });
-            sessionStorage.setItem("jwtToken", JSON.stringify(adminJwtToken));
-            sessionStorage.setItem("userInfo", JSON.stringify(adminUserInfo));
-            sessionStorage.setItem("url", JSON.stringify(url));
-            window.location.href = "/admin";
-          }
-        });
+        if (window.location !== parent.window.location) {
+          console.log("loaded admin iframe");
+          window.addEventListener("message", (event) => {
+            console.log("message recieved in index.html");
+            console.log("eventData", JSON.parse(event.data));
+            const method = JSON.parse(event.data).method;
+            if (method === "login") {
+              const adminJwtToken = JSON.parse(event.data).adminJwtToken;
+              const adminUserInfo = JSON.parse(event.data).adminUserInfo;
+              const url = JSON.parse(event.data).url;
+              // console.log({ adminJwtToken, adminUserInfo });
+              sessionStorage.setItem("jwtToken", JSON.stringify(adminJwtToken));
+              sessionStorage.setItem("userInfo", JSON.stringify(adminUserInfo));
+              sessionStorage.setItem("url", JSON.stringify(url));
+              window.location.href = "/admin";
+            }
+          });
+        } else {
+          console.log("redirecting to admin");
+          window.location.href = "/admin";
+        }
       }
     </script>
   </head>

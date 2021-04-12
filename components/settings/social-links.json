@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_settings_social_links",
+  "info": {
+    "name": "Social Links",
+    "icon": "network-wired",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "network": {
+      "type": "enumeration",
+      "enum": [
+        "Facebook",
+        "Twitter",
+        "Instagram",
+        "Youtube",
+        "Tumblr",
+        "EventBrite",
+        "Other"
+      ],
+      "default": "Other",
+      "required": true,
+      "unique": false
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "handle": {
+      "type": "string",
+      "maxLength": 20,
+      "minLength": 4
+    }
+  }
+}

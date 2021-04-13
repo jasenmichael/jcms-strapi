@@ -21,10 +21,10 @@
               const adminUserInfo = JSON.parse(event.data).adminUserInfo;
               const frontendUrl = JSON.parse(event.data).url; //.includes('/admin') ? JSON.parse(event.data).url.split('/admin')[0] : JSON.parse(event.data).url
               const url = JSON.parse(event.data).url.includes("/admin?q=")
-                ? "/admin" +
+                ? "/admin/" +
                   decodeURIComponent(
                     JSON.parse(event.data).url.split("/admin?q=")[1]
-                  )
+                  ).replace("/admin//", "/admin/")
                 : "/admin";
               console.log("===URL===:", url);
               // console.log({ adminJwtToken, adminUserInfo });

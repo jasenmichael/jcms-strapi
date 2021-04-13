@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_settings_community_links",
+  "info": {
+    "name": "Community Links",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

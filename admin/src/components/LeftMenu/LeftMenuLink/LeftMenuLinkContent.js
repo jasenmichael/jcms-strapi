@@ -66,7 +66,7 @@ const LeftMenuLinkContent = ({
     if (isIframe) {
       e.preventDefault();
       // send message to parent
-      window.parent.postMessage({ path: destination }, frontendUrl);
+      window.parent.postMessage({ path: destination }, "*"/*frontendUrl*/);
     }
   };
   // Create external or internal link.

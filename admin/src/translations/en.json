@@ -80,7 +80,7 @@
   "Settings.PageTitle": "Settings - {name}",
   "Settings.error": "Error",
   "Settings.global": "Global Settings",
-  "Settings.permissions": "Administration panel",
+  "Settings.permissions": "CMS Users & Permissions",
   "Settings.permissions.category": "Permissions settings for the {category}",
   "Settings.permissions.category.plugins": "Permissions settings for the {category} plugin",
   "Settings.permissions.conditions.anytime": "Anytime",

@@ -36,21 +36,8 @@ const LeftMenuLinksSection = ({
   const userInfo = JSON.parse(window.sessionStorage.getItem("userInfo"));
   // console.log({ jwtToken });
   // const userInfo = JSON.parse(userInfo);
-  const theUserRoles = userInfo.roles.map((role) => {
-    return role.id;
-  });
-  // console.log("HAS parent?", window.parent);
-  // console.log(JSON.parse(JSON.stringify(theUserRoles)));
-  // const adminRoles = [
-  //   {
-  //     id: 1,
-  //     name: "Super Admin",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Administrator",
-  //   },
-  // ];
+  const theUserRoles = userInfo.roles.map((role) => role.id);
+
   const isSuperAdmin = theUserRoles.includes(1);
   const isAdministrator = theUserRoles.includes(2);
   // console.log({ isSuperAdmin });

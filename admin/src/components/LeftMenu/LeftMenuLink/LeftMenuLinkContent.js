@@ -52,12 +52,12 @@ const LeftMenuLinkContent = ({
       <LinkLabel>{labelId}</LinkLabel>
     );
 
-  const frontendUrl = JSON.parse(sessionStorage.getItem("url"))
+  const frontendUrl = sessionStorage.getItem("url") ? JSON.parse(sessionStorage.getItem("url"))
     // .includes("")
     .replace(
     "/admin",
     ""
-  );
+  ) : window.location;
   const isIframe = parent.window.location !== window.location;
   const handleClick = (e) => {
     console.log("The link was clicked.", destination);
@@ -66,7 +66,7 @@ const LeftMenuLinkContent = ({
     if (isIframe) {
       e.preventDefault();
       // send message to parent
-      window.parent.postMessage({ path: destination }, "*"/*frontendUrl*/);
+      window.parent.postMessage({ path: destination }, frontendUrl);
     }
   };
   // Create external or internal link.

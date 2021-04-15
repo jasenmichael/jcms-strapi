@@ -14,12 +14,8 @@ module.exports = {
     },
     async afterUpdate(result, params, data) {
       console.log("afterUpdate admin");
-      strapi.config.functions["syncAdmins"](adminOrUser, "afterUpdate", {
-        result,
-        params,
-        data,
-        roles: data.roles
-      });
+      strapi.config.functions["syncAdmins"](adminOrUser, "afterUpdate",
+        result);
     },
     async afterDelete(result, params) {
       console.log("afterDelete admin");

@@ -25,9 +25,7 @@
       "model": "file",
       "via": "related",
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ],
       "plugin": "upload",
       "required": false
@@ -35,7 +33,7 @@
     "heading": {
       "type": "string",
       "required": true,
-      "default": "Home PAge Heading"
+      "default": "Home Page Heading"
     },
     "sub_heading": {
       "type": "string",

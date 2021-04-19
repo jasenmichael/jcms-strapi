@@ -4,17 +4,20 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
+    "kill": "fuser -k 1337/tcp",
     "strapi": "strapi",
     "build": "npm run overrides && strapi build",
     "develop": "npm run overrides && strapi develop",
     "start": "npm run overrides && strapi start",
-    "overrides": "node utils/overrides.js"
+    "overrides": "node utils/overrides.js",
+    "dump": "strapi configuration:dump -p > dump.json"
   },
   "devDependencies": {},
   "dependencies": {
     "dropbox": "^9.4.0",
     "knex": "0.21.18",
     "mysql": "^2.18.1",
+    "sqlite3": "^5.0.2",
     "strapi": "3.5.4",
     "strapi-admin": "3.5.4",
     "strapi-connector-bookshelf": "3.5.4",

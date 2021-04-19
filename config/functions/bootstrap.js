@@ -10,7 +10,12 @@
  * See more details here: https://strapi.io/documentation/developer-docs/latest/setup-deployment-guides/configurations.html#bootstrap
  */
 
-module.exports = () => {
+module.exports = async () => {
   console.log("bootstrapping......");
-  // strapi.config.functions["syncAdmins"]();
+  // const { knexConfig, knex, getTablesList } = await strapi.config.functions[
+  //   "test"
+  // ]();
+  // const tables = await getTablesList('production');
+  // console.log(tables);
+  // console.log(knexConfig);
 };

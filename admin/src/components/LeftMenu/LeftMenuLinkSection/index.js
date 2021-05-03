@@ -23,6 +23,7 @@ const LeftMenuLinksSection = ({
   // HIDE OPTIONS
   const hideSectionsAdministrator = ["plugins", "general"];
   const hideLinksAdministrator = ["Market Place", "Plugins"];
+
   const hideSectionsAuthenticated = ["plugins", "general"];
   const hideLinksAuthenticated = [
     "Media Library",
@@ -32,15 +33,17 @@ const LeftMenuLinksSection = ({
   ];
   // HIDE OPTIONS
 
-  // const jwtToken = JSON.parse(window.sessionStorage.getItem("jwtToken"));
   const userInfo = JSON.parse(window.sessionStorage.getItem("userInfo"));
-  // console.log({ jwtToken });
-  // const userInfo = JSON.parse(userInfo);
   const theUserRoles = userInfo.roles.map((role) => role.id);
 
-  const isSuperAdmin = theUserRoles.includes(1);
-  const isAdministrator = theUserRoles.includes(2);
-  // console.log({ isSuperAdmin });
+  const isSuperAdmin = theUserRoles.includes(1); // super admin role id 1
+  const isAdministrator = theUserRoles.includes(2); // editor role id 2
+
+  Promise.all(
+    setTimeout(() => {
+      console.log("yoyoo");
+    }, 1000)
+  );
 
   const hideSections = isSuperAdmin
     ? []

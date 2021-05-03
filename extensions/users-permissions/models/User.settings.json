@@ -67,6 +67,18 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "blogs": {
+      "collection": "blog",
+      "via": "author"
+    },
+    "firstname": {
+      "type": "string",
+      "required": true
+    },
+    "lastname": {
+      "type": "string",
+      "required": true
     }
   }
 }

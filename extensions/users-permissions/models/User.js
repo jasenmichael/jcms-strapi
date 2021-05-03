@@ -8,6 +8,9 @@ const adminOrUser = "user";
 
 module.exports = {
   lifecycles: {
+    // async beforeCreate(result, data) {
+    //   console.log("BEFORECREATE USER");
+    // },
     async afterCreate(result, data) {
       console.log(`afterCreate ${adminOrUser}`);
       strapi.config.functions["syncAdmins"](adminOrUser, "afterCreate", result);

@@ -7,16 +7,18 @@
     "kill": "fuser -k 1337/tcp",
     "strapi": "strapi",
     "build": "npm run overrides && strapi build",
-    "develop": "npm run overrides && strapi develop",
-    "start": "npm run overrides && strapi start",
+    "develop": "strapi develop",
+    "start": "strapi start",
     "overrides": "node utils/overrides.js",
-    "dump": "strapi configuration:dump -p > dump.json"
+    "dump": "strapi configuration:dump -p > dump.json",
+    "restore": "strapi configuration:restore < dump.json"
   },
   "devDependencies": {},
   "dependencies": {
     "dropbox": "^9.4.0",
     "knex": "0.21.18",
     "mysql": "^2.18.1",
+    "prompt": "^1.1.0",
     "sqlite3": "^5.0.2",
     "strapi": "3.5.4",
     "strapi-admin": "3.5.4",

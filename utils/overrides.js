@@ -8,8 +8,13 @@ const files = [
     dirDist: "./node_modules/strapi-admin/models/User.js",
   },
   {
+    dir: "./extensions/admin/controllers-override/authentication.js",
+    dirDist: "./node_modules/strapi-admin/controllers/authentication.js",
+  },
+  {
     dir: "./admin/src/containers/Admin/Logout/index.js",
-    dirDist: "./node_modules/strapi-admin/admin/src/containers/Admin/Logout/index.js",
+    dirDist:
+      "./node_modules/strapi-admin/admin/src/containers/Admin/Logout/index.js",
   },
 ];
 

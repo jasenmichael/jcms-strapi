@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/wake-up",
+      "handler": "wake-up.status"
+    }
+  ]
+}

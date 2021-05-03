@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/invited-users",
+      "handler": "invited-users.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/invited-users/count",
+      "handler": "invited-users.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/invited-users/:id",
+      "handler": "invited-users.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/invited-users",
+      "handler": "invited-users.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/invited-users/:id",
+      "handler": "invited-users.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/invited-users/:id",
+      "handler": "invited-users.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

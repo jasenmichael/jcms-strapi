@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invited-users",
+  "info": {
+    "name": "Invited Users"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "users_permissions_role": {
+      "plugin": "users-permissions",
+      "model": "role"
+    }
+  }
+}

@@ -27,48 +27,54 @@ import SocialLink from "./SocialLink";
 const FIRST_BLOCK_LINKS = [
   {
     link:
-      "https://strapi.io/documentation/developer-docs/latest/getting-started/quick-start.html#_4-create-a-category-content-type",
+      "plugins/content-manager/singleType/application::site-settings.site-settings",
     contentId: "app.components.BlockLink.documentation.content",
     titleId: "app.components.BlockLink.documentation",
+    title: "Edit Users",
+    description: "Add Remove Edit users and set their role",
   },
   {
-    link: "https://github.com/strapi/foodadvisor",
+    link:
+      "plugins/content-manager/collectionType/plugins::users-permissions.user",
     contentId: "app.components.BlockLink.code.content",
     titleId: "app.components.BlockLink.code",
+    title: "Site Settings",
+    description: "Edit title description and contact information. ",
   },
 ];
 
-const SOCIAL_LINKS = [
-  {
-    name: "YO",
-    link: "https://github.com/strapi/strapi/",
-  },
-  {
-    name: "Slack",
-    link: "https://slack.strapi.io/",
-  },
-  {
-    name: "Medium",
-    link: "https://medium.com/@strapi",
-  },
-  {
-    name: "Twitter",
-    link: "https://twitter.com/strapijs",
-  },
-  {
-    name: "Reddit",
-    link: "https://www.reddit.com/r/Strapi/",
-  },
-  {
-    name: "Forum",
-    link: "https://forum.strapi.io",
-  },
-  {
-    name: "Academy",
-    link: "https://academy.strapi.io",
-  },
-];
+// const SOCIAL_LINKS = [
+//   {
+//     name: "YO",
+//     link: "https://github.com/strapi/strapi/",
+//   },
+//   {
+//     name: "Slack",
+//     link: "https://slack.strapi.io/",
+//   },
+//   {
+//     name: "Medium",
+//     link: "https://medium.com/@strapi",
+//   },
+//   {
+//     name: "Twitter",
+//     link: "https://twitter.com/strapijs",
+//   },
+//   {
+//     name: "Reddit",
+//     link: "https://www.reddit.com/r/Strapi/",
+//   },
+//   {
+//     name: "Forum",
+//     link: "https://forum.strapi.io",
+//   },
+//   {
+//     name: "Academy",
+//     link: "https://academy.strapi.io",
+//   },
+// ];
 
+const SOCIAL_LINKS = [];
 const HomePage = ({ history: { push } }) => {
   const { error, isLoading, posts } = useFetch();
   // Temporary until we develop the menu API
@@ -84,6 +90,13 @@ const HomePage = ({ history: { push } }) => {
     push(
       "/plugins/content-type-builder/content-types/plugins::users-permissions.user?modalType=contentType&kind=collectionType&actionType=create&settingType=base&forTarget=contentType&headerId=content-type-builder.modalForm.contentType.header-create&header_icon_isCustom_1=false&header_icon_name_1=contentType&header_label_1=null"
     );
+  };
+
+  const handleClickInternalLink = (e) => {
+    e.preventDefault();
+    console.log(e.target.href);
+    const path = e.target.href.split("admin/")[1];
+    push(path);
   };
 
   const hasAlreadyCreatedContentTypes = useMemo(() => {
@@ -210,15 +223,18 @@ const HomePage = ({ history: { push } }) => {
                   return (
                     <LinkWrapper
                       href={data.link}
-                      target="_blank"
+                      /* target="_blank" */
                       key={data.link}
                       type={type}
+                      onClick={handleClickInternalLink}
                     >
                       <FormattedMessage id={data.titleId}>
-                        {(title) => <p className="bold">{title}</p>}
+                        {() => <p className="bold">{data.title}</p>}
+                        {/* {(title) => <p className="bold">{title}</p>} */}
                       </FormattedMessage>
                       <FormattedMessage id={data.contentId}>
-                        {(content) => <p>{content}</p>}
+                        {() => <p>{data.description}</p>}
+                        {/* {(content) => <p>{content}</p>} */}
                       </FormattedMessage>
                     </LinkWrapper>
                   );
@@ -246,8 +262,9 @@ const HomePage = ({ history: { push } }) => {
                 {(msg) => (
                   <ALink
                     rel="noopener noreferrer"
-                    href="https://portal.productboard.com/strapi/1-public-roadmap/tabs/2-under-consideration"
-                    target="_blank"
+                    href="roadmap"
+                    // target="_blank"
+                    onClick={handleClickInternalLink}
                   >
                     {msg}
                   </ALink>

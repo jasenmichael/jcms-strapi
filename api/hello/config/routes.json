@@ -1,9 +1,0 @@
-{
-  "routes": [
-    {
-      "method": "GET",
-      "path": "/hello",
-      "handler": "Hello.index"
-    }
-  ]
-}
